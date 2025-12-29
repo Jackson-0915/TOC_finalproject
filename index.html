@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💘 戀愛軍師 AI</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="chat-container">
+      <div class="header">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                  <h1 style="margin: 0; font-size: 24px;">💘 戀愛軍師 AI</h1>
+                  <p style="margin: 0; font-size: 14px; opacity: 0.9;">你的專屬感情顧問</p>
+              </div>
+              
+              <button onclick="resetChat()" style="background: rgba(255,255,255,0.3); border: 1px solid white; color: white; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;">
+                  🔄 重新開始
+              </button>
+          </div>
+      </div>
+
+      <div class="action-buttons">
+          <button class="action-btn" onclick="setMode('date')">📅 安排約會</button>
+          <button class="action-btn" onclick="setMode('analysis')">🧐 對話分析</button>
+          <button class="action-btn" onclick="setMode('horoscope')">🔮 戀愛運勢</button>
+      </div>
+
+      <div class="chat-box" id="chat-box">
+          <div class="message bot-message">你好！我是你的戀愛軍師，請點擊上方按鈕選擇服務，或直接跟我聊天！</div>
+      </div>
+
+      <div class="input-area">
+          <input type="text" id="user-input" placeholder="輸入你的問題..." />
+          <button class="send-btn" onclick="sendMessage()">發送</button>
+      </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

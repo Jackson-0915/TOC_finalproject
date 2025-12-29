@@ -1,0 +1,131 @@
+/* frontend/style.css */
+body {
+  background-color: #fce4ec;
+  font-family: "Microsoft JhengHei", sans-serif;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.chat-container {
+  width: 400px;
+  height: 600px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 50px;
+}
+
+.header {
+  background: #ff4081;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 80%;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* 機器人 (軍師) */
+.bot-message {
+  background: #f0f0f0;
+  color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+/* ▼▼▼ Markdown 樣式優化區 ▼▼▼ */
+.bot-message p {
+  margin: 5px 0; /* 讓段落不要太開 */
+}
+.bot-message ul, .bot-message ol {
+  margin: 5px 0;
+  padding-left: 25px; /* 修正列表縮排，讓它好看一點 */
+}
+.bot-message strong {
+  color: #c2185b; /* 重點文字改成深粉紅色 */
+  font-weight: 900;
+}
+/* ▲▲▲ 優化結束 ▲▲▲ */
+
+/* 使用者 (你) */
+.user-message {
+  background: #ff4081;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.input-area {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+}
+
+button {
+  background: #ff4081;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover { background: #e91e63; }
+
+/* 按鈕區 */
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #fce4ec;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.action-btn {
+  background: white;
+  color: #ff4081;
+  border: 1px solid #ff4081;
+  border-radius: 15px;
+  padding: 5px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background: #ff4081;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
