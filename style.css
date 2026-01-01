@@ -3,10 +3,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 設定字體 */
     background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%); /* 粉色的漸層背景 */
     margin: 0;
-    padding: 0;
+    padding: 0; /* 四個方向（上下左右）全部都是 0px */
     display: flex; /* 使用 Flex 佈局讓內容水平垂直居中 */
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* 左右居中 */
+    align-items: center; /* 上下居中 */
     height: 100vh; /* 讓背景鋪滿整個螢幕高度 */
 }
 
@@ -49,11 +49,11 @@ body {
     cursor: pointer;
     white-space: nowrap; /* 文字不換行 */
     font-size: 14px;
-    transition: 0.3s; /* 滑鼠移入時的動畫過渡時間 */
+    transition: 0.3s; /* 鼠標移入時的動畫過渡時間 */
 }
 
 .action-btn:hover {
-    background: #ff80ab; /* 移入時反白 */
+    background: #ff80ab; /* 鼠標移入時反白 */
     color: white;
 }
 
@@ -70,7 +70,7 @@ body {
 
 /* 訊息框樣式 */
 .message {
-    max-width: 80%; /* 氣泡最寬佔 80% */
+    max-width: 80%; /* 訊息框最寬佔 80% */
     padding: 12px 16px;
     border-radius: 15px;
     font-size: 15px;
