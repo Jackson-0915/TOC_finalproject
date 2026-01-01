@@ -85,6 +85,10 @@ class LoveAgent:
         return None
 
     def chat(self, user_input):
+        # 保持 system prompt 在最前面，但只保留最近 5 次的對話紀錄
+        # 這樣可以防止舊的內容一直污染新的問題
+        if len(self.history) > 10:
+            self.history = [self.history[0]] + self.history[-9:]
         # 人工干預層 (Hard Trigger)
         # 如果使用者問了關鍵字，我們直接「洗腦」LLM，叫它閉嘴只准出工具
         force_tool_prompt = ""

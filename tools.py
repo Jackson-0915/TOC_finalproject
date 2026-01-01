@@ -52,41 +52,49 @@ class LoveTools:
     @staticmethod
     def search_love_strategy(query):
         """
-        工具：RAG 核心 (寬容搜尋版)
+        工具：RAG 核心 - 模糊關鍵字檢索版
         """
         print(f"   [工具執行] 正在檢索 RAG 知識庫: {query}...")
         
+        # 讀取所有知識庫檔案內容
         knowledge_base = LoveTools._read_all_knowledge_files()
         results = []
         
-        # 1. 轉小寫並斷詞
-        query_lower = query.lower()
-        keywords = query_lower.split() # 例如 "金牛座 性格" -> ["金牛座", "性格"]
+        # 1. 處理搜尋字串：轉小寫並拆解成單字 (處理如 "麵包屑 關係" 的情況)
+        query = query.lower()
+        # 建立核心關鍵字清單，用於提高權重
+        core_tags = ["麵包屑", "富蘭克林", "依附理論", "人類圖", "星座", "天蠍座", "處女座", "射手座"]
         
         for filename, content in knowledge_base.items():
             content_lower = content.lower()
+            score = 0
             
-            # A. 絕對匹配 (如果整句都在裡面)
-            if query_lower in content_lower:
-                results.append(f"【來源：{filename}】\n{content}\n")
-                continue
+            # 策略 A：完全匹配 (最高分)
+            if query in content_lower:
+                score += 10
+            
+            # 策略 B：部分關鍵字匹配 (只要命中的字越多，分數越高)
+            for tag in core_tags:
+                if tag in query and tag in content_lower:
+                    score += 5
+            
+            # 策略 C：內容長度加權 (避免抓到太短、無意義的片段)
+            if score > 0:
+                results.append({
+                    "score": score,
+                    "content": f"【來源：{filename}】\n{content}\n"
+                })
 
-            # B. 模糊匹配 (只要有一半的關鍵字出現就算)
-            if not keywords: continue
-            
-            # 計算命中幾個關鍵字
-            match_count = sum(1 for k in keywords if k in content_lower)
-            
-            # 只要命中 > 0 且關鍵字長度 > 1 (避免命中 'a' 這種無意義字)，就抓進來
-            if match_count > 0:
-                 # 為了保險，我們可以檢查是否命中主要關鍵字
-                 results.append(f"【來源：{filename}】(模糊匹配)\n{content}\n")
-
+        # 2. 根據分數排序，取最高分的結果
         if results:
-            final_output = "\n====================\n".join(results)
-            # 截斷過長的內容 (Gemma 4b 上限約 2-3k token)
-            return final_output[:3000] 
+            # 排序：分數最高者在前
+            results.sort(key=lambda x: x["score"], reverse=True)
+            # 整合前三名的結果 (避免內容過長導致模型混亂)
+            final_output = "\n".join([r["content"] for r in results[:3]])
+            print(f"   [知識庫] 檢索成功，命中 {len(results)} 筆相關資料。")
+            return final_output
         else:
+            # 如果本地沒資料，維持原有的網路搜尋邏輯
             print("   [知識庫] 本地無資料，轉為網路搜尋...")
             return LoveTools.search_web(query)
 
