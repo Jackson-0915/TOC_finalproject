@@ -52,35 +52,39 @@ class LoveTools:
     @staticmethod
     def search_love_strategy(query):
         """
-        工具：RAG 核心 (全文檢索)
-        功能：掃描 knowledge 資料夾內所有檔案，找出包含關鍵字的段落。
+        工具：RAG 核心 (寬容搜尋版)
         """
         print(f"   [工具執行] 正在檢索 RAG 知識庫: {query}...")
         
         knowledge_base = LoveTools._read_all_knowledge_files()
         results = []
         
-        # 簡單的關鍵字比對邏輯
-        # 1. 直接比對整句
-        # 2. 拆分關鍵字比對 (例如 "天蠍座 攻略" -> 查 "天蠍座" 和 "攻略")
-        keywords = query.split()
+        # 1. 轉小寫並斷詞
+        query_lower = query.lower()
+        keywords = query_lower.split() # 例如 "金牛座 性格" -> ["金牛座", "性格"]
         
         for filename, content in knowledge_base.items():
-            # 檢查檔案內容是否包含查詢詞
-            if query in content:
+            content_lower = content.lower()
+            
+            # A. 絕對匹配 (如果整句都在裡面)
+            if query_lower in content_lower:
                 results.append(f"【來源：{filename}】\n{content}\n")
-            else:
-                # 模糊比對：如果有一半以上的關鍵字出現在內容中，也算相關
-                match_count = sum(1 for k in keywords if k in content)
-                if match_count > 0 and match_count >= len(keywords) / 2:
-                    # 這裡為了節省 token，我們只回傳全文 (因為檔案不大)，
-                    # 如果檔案很大，這裡應該要改成「只回傳關鍵字前後 500 字」。
-                    results.append(f"【來源：{filename}】(相關度高)\n{content}\n")
+                continue
+
+            # B. 模糊匹配 (只要有一半的關鍵字出現就算)
+            if not keywords: continue
+            
+            # 計算命中幾個關鍵字
+            match_count = sum(1 for k in keywords if k in content_lower)
+            
+            # 只要命中 > 0 且關鍵字長度 > 1 (避免命中 'a' 這種無意義字)，就抓進來
+            if match_count > 0:
+                 # 為了保險，我們可以檢查是否命中主要關鍵字
+                 results.append(f"【來源：{filename}】(模糊匹配)\n{content}\n")
 
         if results:
-            # 將結果合併回傳
             final_output = "\n====================\n".join(results)
-            # 截斷過長的內容，避免超過 LLM 的 token 限制 (雖然 gemma3:4b 還算能撐)
+            # 截斷過長的內容 (Gemma 4b 上限約 2-3k token)
             return final_output[:3000] 
         else:
             print("   [知識庫] 本地無資料，轉為網路搜尋...")
