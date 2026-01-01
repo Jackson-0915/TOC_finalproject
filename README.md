@@ -1,28 +1,38 @@
 # 大學生戀愛AIng
 ## 系統介紹
-大學三學分：學業、社團、愛情。我們深知，愛情是其中最難修的一門，因為它沒有標準答案。這款工具專為在情感中迷航的你設計，結合 數據分析 與 心理學策略，為直男直女提供約會排程、好感診斷與行動建議。我們不保證百分之百的勝率，但我們保證能讓你在猶豫不決時，擁有最理性的大腦，談一場最不留遺憾的戀愛。\
-它還能幫你把約會排程放進Google Calendar裏。
+大學三學分：學業、社團、愛情。我們深知，愛情是其中最難修的一門，因為它沒有標準答案。這款工具專為在情感中迷航的你設計，結合 數據分析 與 心理學策略，為直男直女提供約會排程、好感診斷與行動建議，也能幫你把約會排程放進Google Calendar裏。。我們不保證百分之百的勝率，但我們保證能讓你在猶豫不決時，擁有最理性的大腦，談一場最不留遺憾的戀愛。\
+
 ## 專案架構
 ```text
 .
-├── index.html                # 網頁介面
-├── style.css                 # 網頁樣式表
-├── script.js                 # 前端邏輯
-├── agent_core.py             # 程式碼核心
-├── config.py                 # 設定檔
-├── relationship_manager.py   # 記憶管理
-├── tools.py                  # 功能包
-├── server.py                 # 後端伺服器
-├── main.py                   # Terminal測試用
-├── credentials.json          # Google Calendar的密鑰（自行生成）
-├── StateMachineDiagram.png   # 狀態圖
-├── FlowChart.png             # 流程圖
-└── knowledge/                # 本地資料庫
-    ├── mbti.txt
-    ├── 溝通技巧和戀愛術語.txt
-    ├── 心理學.txt
-    ├── 星座.txt
-    └── 其他.txt
+Love_Agent_Project/
+├── backend_logic/              # [後端邏輯區] 存放所有 Python 核心功能
+│   ├── agent_core.py           # 決策核心
+│   ├── relationship_manager.py # 記憶管理
+│   ├── tools.py                # 功能工具包
+│   └── config.py               # 系統設定
+│
+├── frontend/                   # [前端介面區] 存放網頁相關檔案
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── knowledge/                  # [本地資料庫] 存放 RAG 用的文字檔
+│   ├── mbti.txt
+│   ├── 溝通技巧和戀愛術語.txt
+│   ├── 心理學.txt
+│   ├── 星座.txt
+│   └── 其他.txt
+│
+├── assets/                     # [圖表與文檔] 存放作業要求的圖示
+│   ├── StateMachineDiagram.png
+│   └── FlowChart.png
+│
+├── server.py                   # [伺服器啟動點] 主程式入口
+├── main.py                     # [測試腳本] Terminal 測試用
+├── credentials.json            # [金鑰] Google API 密鑰
+├── requirements.txt            # [環境清單] (建議新增，方便 TA 安裝)
+└── .gitignore                  # [Git 忽略清單] (建議新增，保護隱私)
 ```
 
 ## 技術架構
