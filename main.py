@@ -25,12 +25,12 @@ def main():
             # input() 會停下來，等待使用者在鍵盤輸入內容並按 Enter
             user_input = input("\n[你] > ")
             # 判斷區：檢查使用者是不是輸入了特殊指令
-            # 1. 如果輸入 exit, quit 或 88，就跳出迴圈並結束程式
+            # 如果輸入 exit, quit 或 88，就跳出迴圈並結束程式
             if user_input.lower() in ["exit", "quit", "88"]:
                 print("👋 祝你戀愛順利！掰掰！")
                 break
             
-            # 2. 如果輸入 reset，就把之前的聊天紀錄清除
+            # 如果輸入 reset，就把之前的聊天紀錄清除
             if user_input.lower() == "reset":
                 msg = agent.reset() # 呼叫大腦裡的 reset 功能
                 print(f"🤖 {msg}")

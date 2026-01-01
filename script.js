@@ -76,12 +76,12 @@ async function sendMessage() {
 function addMessage(text, className) {
     const chatBox = document.getElementById("chat-box"); // 找到對話容器
     const div = document.createElement("div"); // 建立一個新的區塊
-    const id = Date.now(); // 產生一個獨一無二的身分證號碼 (用時間當 ID)
+    const id = Date.now(); // 產生一個獨一無二的ID (用時間當 ID)
     
     div.className = `message ${className}`; // 加入 CSS 樣式，決定它是在左邊(bot)還是右邊(user)
     div.setAttribute("data-id", id); // 幫這個區塊貼上身分標籤
     
-    // --- 關鍵修復邏輯 ---
+    // 修復邏輯
     if (className === 'bot-message') {
         // 機器人的話可能包含 Markdown，所以用 innerHTML 解析
         if (text === "軍師思考中...") {
@@ -90,35 +90,30 @@ function addMessage(text, className) {
             div.innerHTML = marked.parse(text); 
         }
     } else {
-        // 使用者的話我們當作純文字處理 (innerText)，這樣比較安全，也能防止 HTML 注入攻擊
-        // 如果這裡沒寫，你的訊息就不會出現在畫面上！
+        // 輸入的文字當作純文字處理會比較安全，也能防止 HTML 注入攻擊
+        // 讓訊息出現在畫面上
         div.innerText = text; 
     }
     
-    chatBox.appendChild(div); // 把蓋好的氣泡放進聊天室裡
+    chatBox.appendChild(div); // 把做好的氣泡放進聊天室裡
     
     // 自動滾動到底部，確保能看到最新的一句話
     chatBox.scrollTop = chatBox.scrollHeight;
     
-    return id; // 把身分證號碼傳回去，方便後續更新內容
+    return id; // 把ID傳回去，以方便後續更新內容
 }
 
-/**
- * 【功能 4：鍵盤監聽】
- * 讓你不用手點按鈕，按一下鍵盤的「Enter」就能送出訊息。
- */
+// 使用 Enter 發送訊息
 document.getElementById("user-input").addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         sendMessage();
     }
 });
 
-/**
- * 【功能 5：重置對話】
- * 就像清空遊戲存檔，讓一切重新開始。
- */
+
+// 重置對話
 async function resetChat() {
-    // 彈出一個確認視窗，防止手滑按錯
+    // 彈出一個確認視窗，防止按錯
     if (!confirm("確定要清除所有對話紀錄，重新開始嗎？")) return;
 
     // 清空網頁上的對話畫面，只留下一句歡迎詞
