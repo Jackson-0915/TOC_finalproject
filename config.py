@@ -1,5 +1,3 @@
-# config.py
-
 # API 設定
 API_KEY = "070fc5dbe1bd5a7ae8a0e2ef1b47947fd9432133f1b84a3d4a73387a96399442"
 API_URL = "https://api-gateway.netdb.csie.ncku.edu.tw/api/chat"

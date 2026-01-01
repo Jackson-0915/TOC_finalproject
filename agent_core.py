@@ -2,7 +2,7 @@
 import requests  # 用於發送網路請求，這是跟LLM API溝通的傳聲筒
 import json      # 用於處理 JSON 格式, 因為 AI 輸出的結果和我們存的檔案都是 JSON
 import ast       # 「抽象語法樹」，這裡用來將字串轉成 Python 字典，當 json.loads 失敗時的備用方案
-import time      # 用於處理時間，例如 API 報錯時，讓程式「睡」兩秒再重試
+import time      # 用於處理時間，例如 API 報錯時，讓程式過兩秒再重試
 import re        # 「正規表示式」，用於搜尋、過濾字串（檢查是否有 MBTI 的四個英文字母）
 
 # 本地模組，負責處理特定寫好的任務
@@ -19,7 +19,7 @@ class LoveAgent:
         }
         # 初始化關係管理器 (負責存取 JSON 檔案中的人物設定)
         self.rm = RelationshipManager()
-        # 紀錄當前正在聊天的對象 (Context Context)，避免使用者一直重複名字
+        # 紀錄當前正在聊天的對象，結合上下文，避免使用者一直重複名字
         self.current_topic_person = None 
         
         # 階段 1: 工具判斷專用的 System Prompt
@@ -87,7 +87,8 @@ class LoveAgent:
         self.history = [{"role": "system", "content": self.main_system_prompt}]
         self.current_topic_person = None 
         return "🧹 記憶已清除，我們重新開始吧！"
-
+    
+    # 控制創意度：0.1 (精準/工具用) vs 0.7 (聊天/創作用)
     def _call_api(self, messages, temperature=0.7):
         """
         呼叫 LLM API 的底層函式。
@@ -97,16 +98,17 @@ class LoveAgent:
             "model": MODEL_NAME,
             "messages": messages,
             "stream": False,
-            # 控制創意度：0.1 (精準/工具用) vs 0.7 (聊天/創作用)
             "temperature": temperature
         }
         
+        # 重新嘗試的次數為3
         max_retries = 3
         for attempt in range(max_retries):
             try:
                 # 設定 Timeout 防止請求卡死
                 res = requests.post(API_URL, headers=self.headers, json=payload, timeout=TIMEOUT)
                 
+                # 200 代表 OK
                 if res.status_code == 200:
                     data = res.json()
                     
@@ -150,10 +152,14 @@ class LoveAgent:
         # 輔助函式：防止 LLM 回傳 Markdown 格式導致解析失敗
         def try_parse_json(text):
             cleaned = text.replace("```json", "").replace("```", "").strip()
-            try: return json.loads(cleaned)
-            except: pass
-            try: return ast.literal_eval(cleaned)
-            except: pass
+            # 嘗試用標準 JSON 格式來解析
+            try: return json.loads(cleaned)  # 嘗試把字串轉成字典。
+            except: pass  # 如果失敗了，直接跳過並執行下一行。
+            # 嘗試用 Python 語法格式來解析
+            # ast.literal_eval 能處理單引號或是 Python 原生的資料格式
+            try: return ast.literal_eval(cleaned) 
+            except: pass  # 如果還是失敗了，一樣不報錯。
+            # 如果全都失敗了，就直接返回 None
             return None
 
         # 輔助函式：清理使用者輸入的資料 (標準化 MBTI、星座名稱)
