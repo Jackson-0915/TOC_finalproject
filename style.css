@@ -1,4 +1,4 @@
-/* frontend/style.css */
+/* style.css (樣式修復版) */
 body {
   background-color: #fce4ec;
   font-family: "Microsoft JhengHei", sans-serif;
@@ -53,27 +53,20 @@ body {
   border-bottom-left-radius: 2px;
 }
 
-/* ▼▼▼ Markdown 樣式優化區 ▼▼▼ */
-.bot-message p {
-  margin: 5px 0; /* 讓段落不要太開 */
-}
-.bot-message ul, .bot-message ol {
-  margin: 5px 0;
-  padding-left: 25px; /* 修正列表縮排，讓它好看一點 */
-}
-.bot-message strong {
-  color: #c2185b; /* 重點文字改成深粉紅色 */
-  font-weight: 900;
-}
-/* ▲▲▲ 優化結束 ▲▲▲ */
+/* Markdown 樣式 */
+.bot-message p { margin: 5px 0; }
+.bot-message ul, .bot-message ol { margin: 5px 0; padding-left: 25px; }
+.bot-message strong { color: #c2185b; font-weight: 900; }
 
-/* 使用者 (你) */
+/* ▼▼▼ 使用者 (你) 關鍵樣式 ▼▼▼ */
+/* 確保這一段沒有被刪掉，不然你會看到白字配白底(隱形) */
 .user-message {
   background: #ff4081;
   color: white;
   align-self: flex-end;
   border-bottom-right-radius: 2px;
 }
+/* ▲▲▲ 樣式結束 ▲▲▲ */
 
 .input-area {
   padding: 15px;
@@ -102,7 +95,6 @@ button {
 
 button:hover { background: #e91e63; }
 
-/* 按鈕區 */
 .action-buttons {
   display: flex;
   justify-content: space-around;
@@ -128,25 +120,4 @@ button:hover { background: #e91e63; }
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* Google Calendar 按鈕樣式 */
-.calendar-btn {
-    background-color: #4285F4; /* Google 藍 */
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 5px;
-    transition: background-color 0.2s;
-}
-
-.calendar-btn:hover {
-    background-color: #3367D6; /* 深藍色 */
 }

@@ -1,4 +1,4 @@
-# server.py
+# server.py (不用動，確認內容即可)
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -21,12 +21,8 @@ class ChatRequest(BaseModel):
 @app.post("/api/chat")
 async def chat_endpoint(req: ChatRequest):
   print(f"收到前端訊息: {req.message}")
-  
-  # agent.chat 現在回傳的是 {"reply": "...", "schedule": ...}
-  result = agent.chat(req.message)
-  
-  # 直接回傳這個字典
-  return result
+  response_text = agent.chat(req.message)
+  return {"reply": response_text}
 
 @app.post("/api/reset")
 async def reset_endpoint():
