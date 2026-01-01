@@ -99,11 +99,17 @@ MODEL_NAME = ""
 <img width="15415" height="4800" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/5b64029a-66a3-4b96-b1aa-4e1e2974981a" />
 
 ## 問題挑戰
-1. 更換主題
-2. 多輪對話中的上下文遺失
-3. 資料幻覺與結構化資料清洗
-4. LLM 無法直接在對話中同時完成「聊天」和「存檔/搜尋」
-5. 意圖優先級衝突與指令遵循
-
+1. Q : 多輪對話中的上下文遺失<br>
+   A : 上下文指針：在 LoveAgent 類別中實作 self.current_topic_person 變數，用來記憶「當前正在討論的對象」<br>
+動態指代修正：在存檔邏輯中加入攔截層，若偵測到 name 為代名詞（他/她），程式自動將其替換為記憶中的 current_topic_person，確保資料寫入正確的對象檔案<br>
+2. Q : 資料幻覺與結構化資料清洗<br>
+   A : 後處理清洗管道：實作 sanitize_info 函式。在寫入 DB 前，透過 RegEx 和關鍵字邏輯（如：強制 4 字母為 MBTI、含「座」字為星座）強制修正 Key-Value<br>
+智能追加邏輯：重寫資料庫管理層 (RelationshipManager)，針對「喜好/地雷」等列表型欄位採用 Append 模式（用逗號串接），確保新舊資訊並存<br>
+3. Q : LLM 無法直接在對話中同時完成「聊天」和「存檔/搜尋」<br>
+   A : 實作「雙階段推理架構 (Two-Stage Inference Pipeline)」：<br>
+階段一 (Intent Detection)：設計一個專門的 tool_selector_prompt，強迫模型只輸出 JSON 格式的指令（如 {"tool": "save_profile", ...}），完全禁止閒聊<br>
+階段二 (Response Generation)：接收工具執行的結果（如「存檔成功」），將其作為 System Message 注入給第二個 Prompt（軍師人格），讓軍師根據系統回報來生成最終回覆<br>
+5. Q : 意圖優先級衝突與指令遵循<br>
+   A : Prompt 工程優化：在 System Prompt 中加入 CRITICAL PRIORITY 區塊，明確定義規則：「只要出現新資訊，必須優先執行 save_profile，即使有問句也要先存檔」<br>系統提示注入：工具執行完畢後，不直接結束，而是將「存檔成功」的結果作為 System Message 插入對話歷史，強迫 LLM 在「已知資料已更新」的前提下，繼續回答使用者的問題<br>
 
 
