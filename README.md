@@ -93,10 +93,17 @@ MODEL_NAME = ""
 7. 改名credentials.json
 
 ## 流程圖
-<img width="2058" height="6162" alt="FlowChart" src="https://github.com/user-attachments/assets/7abbbaf0-18cf-4f4a-9c72-908a0aeb1754" />
+<img width="2321" height="5532" alt="FlowChart" src="https://github.com/user-attachments/assets/ff56d372-1eeb-4785-8a87-d7643743868c" />
 
 ## 狀態圖
 <img width="15415" height="4800" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/5b64029a-66a3-4b96-b1aa-4e1e2974981a" />
 
-## 
+## 問題挑戰
+1. 更換主題
+2. 多輪對話中的上下文遺失
+3. 資料幻覺與結構化資料清洗
+4. LLM 無法直接在對話中同時完成「聊天」和「存檔/搜尋」
+5. 意圖優先級衝突與指令遵循
+
+
 
