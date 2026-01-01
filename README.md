@@ -49,21 +49,49 @@ Love_Agent_Project/
   - 主要套件（fastapi, uvicorn, requests, duckduckgo-search, google-api-python-client)
   - 網絡環境（用於DuckDuckGo搜索與Google Calendar)
 
-2.安裝
+2. 安裝
+
+
 
 複製指令粘貼在Terminal上就會安裝
+
 ```
 pip install fastapi uvicorn requests duckduckgo-search google-api-python-client google-auth-httplib2 google-auth-oauthlib pydantic
 ```
 
-3.自行設定
+
+
+3. Clone 專案
+
+```
+git clone https://github.com/Jackson-0915/TOC_finalproject.git
+```
+
+
+
+4. 自行設定
+
+
 
 自行填入api的key及url和想要的模型
+
 ```
 API_KEY = ""
 API_URL = ""
 MODEL_NAME = ""
 ```
+
+
+
+5. 運行檔案
+
+- 在Terminal上輸入
+
+```
+python -m uvicorn server:app --reload
+```
+
+- 打開index.html<br>
 
 ## 如何自行生成credentials.json
 打開瀏覽器，前往 [Google 雲端控制臺](https://console.cloud.google.com/)， 登錄Google賬號
