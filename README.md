@@ -2,6 +2,43 @@
 ## 動機介紹
 大學三學分：學業、社團、愛情。我們深知，愛情是其中最難修的一門，因為它沒有標準答案。這款工具專為在情感中迷航的你設計，結合 數據分析 與 心理學策略，為直男直女提供約會排程、好感診斷與行動建議，也能幫你把約會排程放進Google Calendar裏。我們不保證百分之百的勝率，但我們保證能讓你在猶豫不決時，擁有最理性的大腦，談一場最不留遺憾的戀愛。
 
+## 🚀 專案技術核心亮點
+
+1. **雙階層 LLM 決策鏈 (Two-Stage Reasoning)：**
+
+第一層：意圖偵測模型 (Temperature: 0.1)。嚴格解析使用者指令，決定是否啟動外部工具 (Tool Calling)。
+
+第二層：人格化回覆模型 (Temperature: 0.7)。結合工具回傳數據與人設 Prompt，生成具備共情能力的建議。
+
+2. **自主性人物檔案管理系統 (Persistence Identity Memory)：**
+
+實作一個 Persistent Data Layer，系統會自動辨識對話中的名字與特徵（MBTI、星座、地雷），並將其儲存於本地 JSON 知識庫。
+
+Context Injection：對話時自動檢索 (Retrieval) 相關對象檔案並注入 Prompt，解決 LLM 長期記憶不足的痛點。
+
+3. **異質工具整合 (Heterogeneous Tooling)：**
+
+Heuristic Algorithm：內建「鏡像行為行為」檢測算法，量化對話好感度。
+
+OAuth 2.0 整合：完整實作 Google API 授權流程，實現自動化行程同步。
+
+Hybrid Search：優先檢索本地專家知識庫 (Local KB)，無果後自動切換至 DuckDuckGo 聯網搜尋。
+
+Google Calendar API：自動同步約會行程。
+
+## 🛠️ 工具箱實現 (LoveTools.py)
+本專案開發了五大核心工具，賦予軍師 Agent 行動能力：
+
+1. 知識庫載入器：支援 .txt 格式的本地攻略本，實作緩存機制 (Cache) 減少硬碟讀取次數。
+
+2. 聯網搜尋器：整合 DuckDuckGo Search，讓軍師能回答當前最新的流行話題或地點。
+
+3. 情感演算法：自定義關鍵字權重表，並引入「鏡像行為檢測」邏輯，量化曖昧對話的好感度。
+
+4. 時間標準化引擎：使用 datetime 模組解決 LLM 回傳時間格式不一的問題。
+
+5. Google 行事曆同步：透過 google-api-python-client 實現自動化約會排程，將虛擬建議轉化為真實行動。
+
 ## 專案架構
 ```text
 .
@@ -159,4 +196,7 @@ python -m uvicorn server:app --reload
 4. Q : 意圖優先級衝突與指令遵循<br>
    A : Prompt 工程優化：在 System Prompt 中加入 CRITICAL PRIORITY 區塊，明確定義規則：「只要出現新資訊，必須優先執行 save_profile，即使有問句也要先存檔」<br>系統提示注入：工具執行完畢後，不直接結束，而是將「存檔成功」的結果作為 System Message 插入對話歷史，強迫 LLM 在「已知資料已更新」的前提下，繼續回答使用者的問題<br>
 
+## 未來擴充
+1. 多模態分析：未來可整合電腦視覺，分析曖昧對象的照片表情或穿搭。
 
+2. LINE/Telegram Bot 整合：將此 Agent 封裝至通訊軟體，達成 24 小時即時軍師提醒。
