@@ -1,123 +1,132 @@
-/* style.css (樣式修復版) */
+/* --- 1. 全域設定：打好地基 --- */
 body {
-  background-color: #fce4ec;
-  font-family: "Microsoft JhengHei", sans-serif;
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 設定漂亮且易讀的字體 */
+    background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%); /* 粉嫩的漸層背景 */
+    margin: 0;
+    padding: 0;
+    display: flex; /* 使用 Flex 佈局讓內容水平垂直居中 */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 讓背景鋪滿整個螢幕高度 */
 }
 
+/* --- 2. 主容器：聊天視窗本體 --- */
 .chat-container {
-  width: 400px;
-  height: 600px;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  margin-top: 50px;
+    width: 100%;
+    max-width: 500px; /* 限制寬度，在寬螢幕上不會太散 */
+    height: 85vh; /* 高度佔螢幕的 85% */
+    background: white;
+    border-radius: 20px; /* 圓角效果，看起來比較溫柔 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* 淡淡的陰影，增加立體感 */
+    display: flex;
+    flex-direction: column; /* 讓內容由上往下排列 (Header -> Box -> Input) */
+    overflow: hidden; /* 確保圓角內的東西不會超出邊界 */
 }
 
+/* --- 3. 頁首區塊：標題與重新開始按鈕 --- */
 .header {
-  background: #ff4081;
-  color: white;
-  padding: 20px;
-  text-align: center;
+    background: linear-gradient(90deg, #ff80ab, #f48fb1); /* 標題列橫向漸層 */
+    color: white;
+    padding: 20px;
 }
 
-.chat-box {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-  background: #fafafa;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.message {
-  padding: 10px 15px;
-  border-radius: 15px;
-  max-width: 80%;
-  line-height: 1.5;
-  word-wrap: break-word;
-}
-
-/* 機器人 (軍師) */
-.bot-message {
-  background: #f0f0f0;
-  color: #333;
-  align-self: flex-start;
-  border-bottom-left-radius: 2px;
-}
-
-/* Markdown 樣式 */
-.bot-message p { margin: 5px 0; }
-.bot-message ul, .bot-message ol { margin: 5px 0; padding-left: 25px; }
-.bot-message strong { color: #c2185b; font-weight: 900; }
-
-/* ▼▼▼ 使用者 (你) 關鍵樣式 ▼▼▼ */
-/* 確保這一段沒有被刪掉，不然你會看到白字配白底(隱形) */
-.user-message {
-  background: #ff4081;
-  color: white;
-  align-self: flex-end;
-  border-bottom-right-radius: 2px;
-}
-/* ▲▲▲ 樣式結束 ▲▲▲ */
-
-.input-area {
-  padding: 15px;
-  border-top: 1px solid #eee;
-  display: flex;
-  gap: 10px;
-}
-
-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  outline: none;
-}
-
-button {
-  background: #ff4081;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover { background: #e91e63; }
-
+/* --- 4. 快捷按鈕區：安排約會、分析等 --- */
 .action-buttons {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  background-color: #fce4ec;
-  border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    gap: 10px; /* 按鈕之間的間距 */
+    padding: 15px;
+    background: #fff9fa;
+    border-bottom: 1px solid #ffebee; /* 底部分隔線 */
+    overflow-x: auto; /* 如果手機螢幕太窄，按鈕可以橫向滑動 */
 }
 
 .action-btn {
-  background: white;
-  color: #ff4081;
-  border: 1px solid #ff4081;
-  border-radius: 15px;
-  padding: 5px 12px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
+    background: white;
+    border: 1px solid #ff80ab;
+    color: #ff80ab;
+    padding: 8px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    white-space: nowrap; /* 文字不換行 */
+    font-size: 14px;
+    transition: 0.3s; /* 滑鼠移入時的動畫過渡時間 */
 }
 
 .action-btn:hover {
-  background: #ff4081;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: #ff80ab; /* 移入時反白 */
+    color: white;
+}
+
+/* --- 5. 聊天訊息顯示區 --- */
+.chat-box {
+    flex: 1; /* 重要：自動佔滿剩下的所有剩餘空間 */
+    padding: 20px;
+    overflow-y: auto; /* 內容太多時出現垂直捲軸 */
+    background: #ffffff;
+    display: flex;
+    flex-direction: column; /* 訊息由上往下的流向 */
+    gap: 15px; /* 訊息氣泡之間的距離 */
+}
+
+/* --- 6. 訊息氣泡基礎樣式 --- */
+.message {
+    max-width: 80%; /* 氣泡最寬佔 80%，留白看起來比較像聊天軟體 */
+    padding: 12px 16px;
+    border-radius: 15px;
+    font-size: 15px;
+    line-height: 1.5; /* 讓文字行距大一點，比較好讀 */
+    word-wrap: break-word; /* 遇到超長字串自動換行 */
+}
+
+/* 機器人訊息（左邊） */
+.bot-message {
+    align-self: flex-start; /* 靠左對齊 */
+    background: #f1f1f1;
+    color: #333;
+    border-bottom-left-radius: 2px; /* 讓左下角尖一點，像對話箭頭 */
+}
+
+/* 使用者訊息（右邊） */
+.user-message {
+    align-self: flex-end; /* 靠右對齊 */
+    background: #ff80ab;
+    color: white;
+    border-bottom-right-radius: 2px; /* 讓右下角尖一點 */
+}
+
+/* --- 7. 下方輸入區域 --- */
+.input-area {
+    padding: 20px;
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+}
+
+#user-input {
+    flex: 1; /* 輸入框自動撐滿寬度 */
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    outline: none; /* 點擊時不要出現預設藍色邊框 */
+    transition: 0.3s;
+}
+
+#user-input:focus {
+    border-color: #ff80ab; /* 點擊時邊框變粉色 */
+}
+
+.send-btn {
+    background: #ff80ab;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    background: #f50057; /* 移入時變深粉紅色 */
 }

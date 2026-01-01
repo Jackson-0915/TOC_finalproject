@@ -55,6 +55,8 @@ class RelationshipManager:
             data[name] = {"info": {}}
         
         # 確保 info 層級存在
+        # info 讓資料變得很整齊且具有擴充性
+        # info 可以把「對象的個人特質」跟「其他系統資訊」分開，也可以避免鍵值衝突
         if "info" not in data[name]:
             data[name]["info"] = {}
 
