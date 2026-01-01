@@ -88,7 +88,7 @@ class LoveAgent:
         self.current_topic_person = None 
         return "🧹 記憶已清除，我們重新開始吧！"
     
-    # 控制創意度：0.1 (精準/工具用) vs 0.7 (聊天/創作用)
+    # 控制創意度(temperature)：0.7 (聊天/創作用)
     def _call_api(self, messages, temperature=0.7):
         """
         呼叫 LLM API 的底層函式。
@@ -189,7 +189,7 @@ class LoveAgent:
         ]
         
         print("🕵️ [系統] 正在判斷意圖...")
-        # 使用低溫 (temperature=0.1) 確保 JSON 格式穩定
+        # 控制創意度(temperature) ：0.1 (精準/工具用)
         response = self._call_api(selector_messages, temperature=0.1)
         if not response: return None
         
@@ -205,9 +205,19 @@ class LoveAgent:
                 # 工具 1: 儲存人物資料
                 if tool_name == "save_profile":
                     data = arg
+                    # 1. 檢查 arg 是不是一個「字串」？
+                    # AI 有時候會把 JSON 內容包在引號裡面變成一長串文字，而不是直接給我們結構化資料
                     if isinstance(arg, str): 
+                        
+                        # 2. 如果是字串，就呼叫我們之前寫好的「防禦性解析」功能 (try_parse_json)
+                        # 試圖把這串「長得像 JSON 的文字」轉成真正的「Python 字典」
                         parsed = try_parse_json(arg)
-                        if parsed: data = parsed
+                        
+                        # 3. 如果解析成功了（parsed 不是 None）
+                        if parsed: 
+                            # 4. 就把解析後的成果 (字典) 覆蓋掉原本的字串資料
+                            # 這樣後面的程式碼就能開心地用 data["name"] 這種方式來讀取資料了
+                            data = parsed
                     
                     if isinstance(data, dict) and "name" in data:
                         raw_name = data["name"]
