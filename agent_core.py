@@ -205,24 +205,20 @@ class LoveAgent:
                 # 工具 1: 儲存人物資料
                 if tool_name == "save_profile":
                     data = arg
-                    # 1. 檢查 arg 是不是一個「字串」？
-                    # AI 有時候會把 JSON 內容包在引號裡面變成一長串文字，而不是直接給我們結構化資料
+                    # 先檢查 arg 是不是一個字串
+                    # AI 有時候會把 JSON 內容包在引號裡面變成一長串文字，而不是直接給結構化的資料
                     if isinstance(arg, str): 
-                        
-                        # 2. 如果是字串，就呼叫我們之前寫好的「防禦性解析」功能 (try_parse_json)
-                        # 試圖把這串「長得像 JSON 的文字」轉成真正的「Python 字典」
+                        # 如果是字串，就呼叫之前寫好的功能 (try_parse_json)
+                        # 試圖把這串長得像 JSON 的文字轉成真正的 Python 字典
                         parsed = try_parse_json(arg)
-                        
-                        # 3. 如果解析成功了（parsed 不是 None）
+                        # 如果解析成功了，就把解析後的成果 (字典) 覆蓋掉原本的字串資料
+                        # 後面的程式碼就能使用 data["name"] 的方式來讀取資料
                         if parsed: 
-                            # 4. 就把解析後的成果 (字典) 覆蓋掉原本的字串資料
-                            # 這樣後面的程式碼就能開心地用 data["name"] 這種方式來讀取資料了
                             data = parsed
                     
                     if isinstance(data, dict) and "name" in data:
                         raw_name = data["name"]
                         raw_info = data.get("info", {})
-                        
                         # 代名詞解析
                         # 「她喜歡吃蘋果」，系統要把「她」替換成「MuQ醬」
                         pronouns = ["他", "她", "它", "你", "我", "祂", "He", "She", "It", "You"]
@@ -251,7 +247,7 @@ class LoveAgent:
                 elif tool_name == "get_reply_styles": return LoveTools.generate_reply_styles(arg)
                 elif tool_name == "search_web": return LoveTools.search_web(arg)
 
-                # 工具 7: 行程規劃 (生成建議)
+                # 工具 7: 行程規劃 (生成建議詢問訊息)
                 elif tool_name == "schedule_itinerary":
                     items = arg
                     plan_text = ""

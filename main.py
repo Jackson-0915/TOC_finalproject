@@ -1,4 +1,4 @@
-# 從 agent_core.py 裡面，把 LoveAgent 搬過來使用
+# 要在Terminal輸入輸出時，才會使用
 from agent_core import LoveAgent
 
 def main():

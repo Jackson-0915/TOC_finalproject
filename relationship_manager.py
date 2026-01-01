@@ -19,7 +19,7 @@ class RelationshipManager:
         if not os.path.exists(DB_FILE):
             # 'w' 代表寫入模式，encoding="utf-8" 確保中文不會變成亂碼
             with open(DB_FILE, "w", encoding="utf-8") as f:
-                # indent=4 是為了讓存出來的檔案排版漂亮，方便人類閱讀
+                # indent=4 是為了讓存出來的檔案排版漂亮，方便閱讀
                 json.dump({}, f, ensure_ascii=False, indent=4)
 
     def _load_db(self):
@@ -47,10 +47,10 @@ class RelationshipManager:
         name: 名字 (例如: MuQ醬)
         attributes: 特徵字典 (例如: {"MBTI": "ENFP", "喜好": "看海"})
         """
-        # 1. 先把舊的記憶通通讀取出來
+        # 先把舊的記憶通通讀取出來
         data = self._load_db()
         
-        # 2. 如果這個人是第一次出現，先幫他在字典裡開一個位子
+        # 如果這個人是第一次出現，先幫他在字典裡開一個位置
         if name not in data:
             data[name] = {"info": {}}
         
@@ -58,26 +58,26 @@ class RelationshipManager:
         if "info" not in data[name]:
             data[name]["info"] = {}
 
-        # 3. 準備開始更新資料
+        # 準備開始更新資料
         current_info = data[name]["info"] # 目前已有的資料
         new_info = attributes             # AI 這次想存的新資料
 
-        # 4. 遍歷新資料的每一個項目 (Key)
+        # 遍歷新資料的每一個項目 (Key)
         for key, value in new_info.items():
-            # 【特殊邏輯】針對「喜好、討厭、地雷」進行「追加」
-            # 例如：本來喜歡「看海」，新資料是「吃蘋果」，我們希望變成「看海、吃蘋果」
+            # 特殊邏輯針對「喜好、討厭、地雷」進行「追加」
+            # 例如：本來喜歡「看海」，新資料是「吃蘋果」，會變成「看海、吃蘋果」
             if key in ["喜好", "討厭", "地雷"] and key in current_info:
                 # 檢查這項喜好是不是已經記過了，沒記過才加進去
                 if value not in current_info[key]:
                     current_info[key] = f"{current_info[key]}、{value}"
             else:
-                # 其他欄位 (如星座、MBTI) 如果有變動，直接「覆蓋」成最新的
+                # 其他欄位 (如星座、MBTI) 如果有變動，直接覆蓋，變成最新的
                 current_info[key] = value
         
-        # 5. 把更新完的個人檔案塞回總資料中
+        # 把更新完的個人檔案塞回總資料中
         data[name]["info"] = current_info
         
-        # 6. 最後把整份總資料存進硬碟
+        # 最後把整份總資料存進硬碟
         self._save_db(data)
         return f"已記錄/更新對象【{name}】的資料：{current_info}"
 
