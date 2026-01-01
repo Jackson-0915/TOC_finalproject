@@ -24,6 +24,15 @@
     ├── 星座.txt
     └── 其他.txt
 ```
+
+## 技術架構
+
+- 前端：HTML, CSS, JavaScript, Marked.js
+- 後端: Python, FastAPI, Uvicorn, Pydantic
+- LLM服務: RAG, Function Calling, Ollama API
+- 外部服務整合: Google Calendar API, DuckDuckGo Search
+- 資料儲存: JSON File Storage
+
 ## 安裝與設定
 1.環境
   - Python 3.9+
