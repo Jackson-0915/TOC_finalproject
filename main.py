@@ -1,5 +1,5 @@
 # 要在Terminal輸入輸出時，才會使用
-from agent_core import LoveAgent
+from backend_logic.agent_core import LoveAgent
 
 def main():
     """

@@ -1,7 +1,7 @@
 from fastapi import FastAPI               # Web 伺服器框架
 from fastapi.middleware.cors import CORSMiddleware # 解決跨來源資源共享的問題
 from pydantic import BaseModel             # 規定「資料格式」的模具
-from agent_core import LoveAgent
+from backend_logic.agent_core import LoveAgent
 
 # 初始化伺服器
 app = FastAPI() # 建立一個伺服器實體
