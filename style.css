@@ -1,7 +1,7 @@
-/* --- 1. 全域設定：打好地基 --- */
+/* 全域設定 */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 設定漂亮且易讀的字體 */
-    background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%); /* 粉嫩的漸層背景 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 設定字體 */
+    background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%); /* 粉色的漸層背景 */
     margin: 0;
     padding: 0;
     display: flex; /* 使用 Flex 佈局讓內容水平垂直居中 */
@@ -10,34 +10,34 @@ body {
     height: 100vh; /* 讓背景鋪滿整個螢幕高度 */
 }
 
-/* --- 2. 主容器：聊天視窗本體 --- */
+/* 聊天視窗 */
 .chat-container {
     width: 100%;
     max-width: 500px; /* 限制寬度，在寬螢幕上不會太散 */
     height: 85vh; /* 高度佔螢幕的 85% */
     background: white;
-    border-radius: 20px; /* 圓角效果，看起來比較溫柔 */
+    border-radius: 20px; /* 圓角效果 */
     box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* 淡淡的陰影，增加立體感 */
     display: flex;
-    flex-direction: column; /* 讓內容由上往下排列 (Header -> Box -> Input) */
+    flex-direction: column; /* 讓內容由上往下排列 */
     overflow: hidden; /* 確保圓角內的東西不會超出邊界 */
 }
 
-/* --- 3. 頁首區塊：標題與重新開始按鈕 --- */
+/* 標題與重新開始按鈕 */
 .header {
     background: linear-gradient(90deg, #ff80ab, #f48fb1); /* 標題列橫向漸層 */
     color: white;
     padding: 20px;
 }
 
-/* --- 4. 快捷按鈕區：安排約會、分析等 --- */
+/* 快捷按鈕 */
 .action-buttons {
     display: flex;
     gap: 10px; /* 按鈕之間的間距 */
     padding: 15px;
     background: #fff9fa;
     border-bottom: 1px solid #ffebee; /* 底部分隔線 */
-    overflow-x: auto; /* 如果手機螢幕太窄，按鈕可以橫向滑動 */
+    overflow-x: auto; /* 如果螢幕太窄，按鈕可以橫向滑動 */
 }
 
 .action-btn {
@@ -57,24 +57,24 @@ body {
     color: white;
 }
 
-/* --- 5. 聊天訊息顯示區 --- */
+/* 顯示聊天訊息 */
 .chat-box {
-    flex: 1; /* 重要：自動佔滿剩下的所有剩餘空間 */
+    flex: 1; /* 自動佔滿剩下的所有剩餘空間 */
     padding: 20px;
     overflow-y: auto; /* 內容太多時出現垂直捲軸 */
     background: #ffffff;
     display: flex;
     flex-direction: column; /* 訊息由上往下的流向 */
-    gap: 15px; /* 訊息氣泡之間的距離 */
+    gap: 15px; /* 訊息框之間的距離 */
 }
 
-/* --- 6. 訊息氣泡基礎樣式 --- */
+/* 訊息框樣式 */
 .message {
-    max-width: 80%; /* 氣泡最寬佔 80%，留白看起來比較像聊天軟體 */
+    max-width: 80%; /* 氣泡最寬佔 80% */
     padding: 12px 16px;
     border-radius: 15px;
     font-size: 15px;
-    line-height: 1.5; /* 讓文字行距大一點，比較好讀 */
+    line-height: 1.5; /* 讓文字行距大一點，易讀 */
     word-wrap: break-word; /* 遇到超長字串自動換行 */
 }
 
@@ -94,7 +94,7 @@ body {
     border-bottom-right-radius: 2px; /* 讓右下角尖一點 */
 }
 
-/* --- 7. 下方輸入區域 --- */
+/* 下方輸入區域 */
 .input-area {
     padding: 20px;
     background: white;
@@ -108,7 +108,7 @@ body {
     padding: 12px 15px;
     border: 1px solid #ddd;
     border-radius: 25px;
-    outline: none; /* 點擊時不要出現預設藍色邊框 */
+    outline: none; /* 點擊時不要出現預設的藍色邊框 */
     transition: 0.3s;
 }
 
