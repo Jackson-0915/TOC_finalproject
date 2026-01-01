@@ -96,6 +96,7 @@ MODEL_NAME = ""
 <img width="2058" height="6162" alt="FlowChart" src="https://github.com/user-attachments/assets/7abbbaf0-18cf-4f4a-9c72-908a0aeb1754" />
 
 ## 狀態圖
-<img width="15415" height="4800" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/51373fe3-1caa-4202-bfce-9b5a6e6a0a44" />
+<img width="15415" height="4800" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/5b64029a-66a3-4b96-b1aa-4e1e2974981a" />
 
 ## 
+
