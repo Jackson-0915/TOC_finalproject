@@ -74,13 +74,15 @@ MODEL_NAME = ""
     - 開發人員聯絡資訊：自己的 Email
     - 其他欄位留空
     - 按「儲存並繼續」
-4. 加入測試使用者 (Add Users)
+4. 加入測試使用者 (Add Users)：
+
 <img width="3839" height="1918" alt="Screenshot 2026-01-01 222455" src="https://github.com/user-attachments/assets/3ab1e758-46fb-4be9-b9ad-4a3ddc1d4001" />
 
-    - 點擊左側選單的「目标对象 (Audience)」
-    - 在右邊的畫面往下滑，你會看到一個區塊叫做 「测试用户 (Test users)」
-    - 點擊 「+ ADD USERS (添加用户)」
-    - 輸入 Google Email，然後儲存
+- 點擊左側選單的「目标对象 (Audience)」
+- 在右邊的畫面往下滑，你會看到一個區塊叫做 「测试用户 (Test users)」
+- 點擊 「+ ADD USERS (添加用户)」
+- 輸入 Google Email，然後儲存
+
 ### 第四階段：建立憑證
 1. 點擊左側選單的 「憑證 (Credentials)」
 2. 點擊上方 「+ 建立憑證 (+ CREATE CREDENTIALS)」 -> 選擇 「OAuth 用戶端 ID (OAuth client ID)」
@@ -95,3 +97,5 @@ MODEL_NAME = ""
 
 ## 狀態圖
 <img width="15415" height="4800" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/51373fe3-1caa-4202-bfce-9b5a6e6a0a44" />
+
+## 
