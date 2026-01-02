@@ -165,7 +165,7 @@ python -m uvicorn server:app --reload
 7. 改名credentials.json
 
 ## 流程圖
-<img width="2321" height="5532" alt="FlowChart" src="https://github.com/user-attachments/assets/ff56d372-1eeb-4785-8a87-d7643743868c" />
+<img width="6059" height="6405" alt="FlowChart" src="https://github.com/user-attachments/assets/672b8d6e-329a-468f-a30e-069481d75d11" />
 
 ## 狀態圖
 <img width="3472" height="7025" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/cddd5df5-a275-4c01-a244-559ba519448d" />
