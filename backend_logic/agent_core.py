@@ -6,9 +6,9 @@ import time      # 用於處理時間，例如 API 報錯時，讓程式過兩�
 import re        # 「正規表示式」，用於搜尋、過濾字串（檢查是否有 MBTI 的四個英文字母）
 
 # 本地模組，負責處理特定寫好的任務
-from config import API_KEY, API_URL, MODEL_NAME, TIMEOUT  # 從設定檔讀取密鑰與 URL，避免密鑰直接寫死在程式碼裡
-from tools import LoveTools                              # 工具箱，包含 Google 日曆、網頁搜尋、好感度計算等實作
-from relationship_manager import RelationshipManager      # 檔案管理員，負責去讀取和寫入人物資料的 JSON 檔
+from backend_logic.config import API_KEY, API_URL, MODEL_NAME, TIMEOUT  # 從設定檔讀取密鑰與 URL，避免密鑰直接寫死在程式碼裡
+from backend_logic.tools import LoveTools                              # 工具箱，包含 Google 日曆、網頁搜尋、好感度計算等實作
+from backend_logic.relationship_manager import RelationshipManager      # 檔案管理員，負責去讀取和寫入人物資料的 JSON 檔
 
 class LoveAgent:
     def __init__(self):
