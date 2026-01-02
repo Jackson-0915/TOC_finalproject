@@ -168,7 +168,7 @@ python -m uvicorn server:app --reload
 <img width="2321" height="5532" alt="FlowChart" src="https://github.com/user-attachments/assets/ff56d372-1eeb-4785-8a87-d7643743868c" />
 
 ## 狀態圖
-<img width="15415" height="4800" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/5b64029a-66a3-4b96-b1aa-4e1e2974981a" />
+<img width="3472" height="7025" alt="StateMachineDiagram" src="https://github.com/user-attachments/assets/cddd5df5-a275-4c01-a244-559ba519448d" />
 
 ## 問題挑戰
 1. Q : 多輪對話中的上下文遺失<br>
