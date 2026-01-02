@@ -1,30 +1,27 @@
-# 大學生戀愛AIng
-## 動機介紹
-大學三學分：學業、社團、愛情。我們深知，愛情是其中最難修的一門，因為它沒有標準答案。這款工具專為在情感中迷航的你設計，結合 數據分析 與 心理學策略，為直男直女提供約會排程、好感診斷與行動建議，也能幫你把約會排程放進Google Calendar裏。我們不保證百分之百的勝率，但我們保證能讓你在猶豫不決時，擁有最理性的大腦，談一場最不留遺憾的戀愛。
+# 💘 LoveAgent-AI：大學生戀愛軍師系統
+
+> **「學業、社團、愛情」大學三學分，這一次，我們用 AI 幫你修滿。**
+
+這是一款專為大學生設計的情感決策 Agent。它不只是聊天機器人，而是結合 **數據分析、心理學策略與自動化排程** 的全方位戀愛導師。透過雙階層 LLM 推理與 RAG 技術，為你在曖昧的迷航中指引方向。
+
+---
 
 ## 🚀 專案技術核心亮點
 
-1. **雙階層 LLM 決策鏈 (Two-Stage Reasoning)：**
+### 🧠 雙階層 LLM 決策鏈 (Two-Stage Reasoning)
+* **第一層：意圖偵測 (Temperature: 0.1)** - 嚴格解析指令，確保系統在「聊天」與「功能執行（Tool Calling）」之間精準切換，避免無謂的資源浪費。
+* **第二層：人格化回覆 (Temperature: 0.7)** - 結合工具反饋與情境 Prompt，生成具備共情能力的建議，讓 AI 的回覆更有「溫度」。
 
-第一層：意圖偵測模型 (Temperature: 0.1)。嚴格解析使用者指令，決定是否啟動外部工具 (Tool Calling)。
+### 💾 自主性人物檔案管理 (Persistence Identity Memory)
+* **動態記憶注入**：系統自動從對話中提取姓名、MBTI、星座與喜好，並同步更新至本地 JSON 知識庫。
+* **上下文增強 (Context Injection)**：在每一輪對話中，系統會自動檢索相關對象的歷史特徵，解決 LLM 長期記憶不足的痛點。
 
-第二層：人格化回覆模型 (Temperature: 0.7)。結合工具回傳數據與人設 Prompt，生成具備共情能力的建議。
+### 🛠️ 異質工具整合 (Heterogeneous Tooling)
+* **情感演算法 (Heuristic Scoring)**：內建「鏡像行為」檢測算法，透過關鍵字加權量化分析對方的訊息熱度。
+* **自動化行程同步**：整合 **Google Calendar API (OAuth 2.0)**，將約會建議直接轉化為實際行程。
+* **混合檢索 (Hybrid Search)**：優先搜尋本地專家攻略本 (Local RAG)，若無相關資料則自動觸發 **DuckDuckGo 聯網搜尋**。
 
-2. **自主性人物檔案管理系統 (Persistence Identity Memory)：**
-
-實作一個 Persistent Data Layer，系統會自動辨識對話中的名字與特徵（MBTI、星座、地雷），並將其儲存於本地 JSON 知識庫。
-
-Context Injection：對話時自動檢索 (Retrieval) 相關對象檔案並注入 Prompt，解決 LLM 長期記憶不足的痛點。
-
-3. **異質工具整合 (Heterogeneous Tooling)：**
-
-Heuristic Algorithm：內建「鏡像行為行為」檢測算法，量化對話好感度。
-
-OAuth 2.0 整合：完整實作 Google API 授權流程，實現自動化行程同步。
-
-Hybrid Search：優先檢索本地專家知識庫 (Local KB)，無果後自動切換至 DuckDuckGo 聯網搜尋。
-
-Google Calendar API：自動同步約會行程。
+---
 
 ## 🛠️ 工具箱實現 (LoveTools.py)
 本專案開發了五大核心工具，賦予軍師 Agent 行動能力：
@@ -41,7 +38,6 @@ Google Calendar API：自動同步約會行程。
 
 ## 專案架構
 ```text
-.
 Love_Agent_Project/
 ├── backend_logic/              # [後端邏輯區] 存放所有 Python 核心功能
 │   ├── agent_core.py           # 決策核心
@@ -71,7 +67,7 @@ Love_Agent_Project/
 └── .gitignore                  # [Git 忽略清單] (保護隱私)
 ```
 
-## 技術架構
+## 🛠️技術架構
 
 - 前端：HTML, CSS, JavaScript, Marked.js
 - 後端: Python, FastAPI, Uvicorn, Pydantic
@@ -79,55 +75,48 @@ Love_Agent_Project/
 - 外部服務整合: Google Calendar API, DuckDuckGo Search
 - 資料儲存: JSON File Storage
 
-## 安裝與設定
-1.環境
-  - Python 3.9+
-  - 主要套件（fastapi, uvicorn, requests, duckduckgo-search, google-api-python-client)
-  - 網絡環境（用於DuckDuckGo搜索與Google Calendar)
+## 🚀 快速開始
 
-2. 安裝
+### 1. 環境需求
+* **Python 3.9+**
+* 穩定的網路連線（用於執行 DuckDuckGo 搜尋與 Google API）
 
-
-
-複製指令粘貼在Terminal上就會安裝
-
-```
+### 2. 安裝套件依賴
+* 請在終端機（Terminal）執行以下指令安裝必要套件：
+```bash
 pip install fastapi uvicorn requests duckduckgo-search google-api-python-client google-auth-httplib2 google-auth-oauthlib pydantic
 ```
+  
+### 3. Clone 專案
 
-
-
-3. Clone 專案
-
-```
+```bash
 git clone https://github.com/Jackson-0915/TOC_finalproject.git
+或
+git clone [https://github.com/Jackson-0915/TOC_finalproject.git](https://github.com/Jackson-0915/TOC_finalproject.git)
+cd TOC_finalproject
 ```
 
 
 
-4. 自行設定
+### 4. 設定 API 資訊
 
+* 於 `backend/config.py` 填入api的key及url和想要的模型
 
-
-自行填入api的key及url和想要的模型
-
-```
-API_KEY = ""
-API_URL = ""
-MODEL_NAME = ""
+```python
+API_KEY = "您的_API_KEY"
+API_URL = "您的_API_URL"
+MODEL_NAME = "您的_模型名稱"
 ```
 
 
 
-5. 運行檔案
+### 5. 運行檔案
+* 在終端機輸入以下指令啟動後端伺服器：
 
-- 在Terminal上輸入
-
-```
+```bash
 python -m uvicorn server:app --reload
 ```
-
-- 打開index.html<br>
+* 啟動後，直接開啟 `frontend/index.html` 即可進入戀愛軍師介面。
 
 ## 如何自行生成credentials.json
 打開瀏覽器，前往 [Google 雲端控制臺](https://console.cloud.google.com/)， 登錄Google賬號
