@@ -68,8 +68,7 @@ Love_Agent_Project/
 ├── server.py                   # [伺服器啟動點] 主程式入口
 ├── main.py                     # [測試腳本] Terminal 測試用
 ├── credentials.json            # [金鑰] Google API 密鑰
-├── requirements.txt            # [環境清單] (建議新增，方便 TA 安裝)
-└── .gitignore                  # [Git 忽略清單] (建議新增，保護隱私)
+└── .gitignore                  # [Git 忽略清單] (保護隱私)
 ```
 
 ## 技術架構
@@ -162,8 +161,8 @@ python -m uvicorn server:app --reload
 
 <img width="3839" height="1918" alt="Screenshot 2026-01-01 222455" src="https://github.com/user-attachments/assets/3ab1e758-46fb-4be9-b9ad-4a3ddc1d4001" />
 
-- 點擊左側選單的「目标对象 (Audience)」
-- 在右邊的畫面往下滑，你會看到一個區塊叫做 「测试用户 (Test users)」
+- 點擊左側選單的「目標對象 (Audience)」
+- 在右邊的畫面往下滑，你會看到一個區塊叫做 「測試用户 (Test users)」
 - 點擊 「+ ADD USERS (添加用户)」
 - 輸入 Google Email，然後儲存
 
@@ -197,6 +196,23 @@ python -m uvicorn server:app --reload
    A : Prompt 工程優化：在 System Prompt 中加入 CRITICAL PRIORITY 區塊，明確定義規則：「只要出現新資訊，必須優先執行 save_profile，即使有問句也要先存檔」<br>系統提示注入：工具執行完畢後，不直接結束，而是將「存檔成功」的結果作為 System Message 插入對話歷史，強迫 LLM 在「已知資料已更新」的前提下，繼續回答使用者的問題<br>
 
 ## 未來擴充
-1. 多模態分析：未來可整合電腦視覺，分析曖昧對象的照片表情或穿搭。
+1. 網路爬蟲：RAG可以擴充資料來源
 
-2. LINE/Telegram Bot 整合：將此 Agent 封裝至通訊軟體，達成 24 小時即時軍師提醒。
+2. 包裝客自化：環境外觀可自訂義
+
+3. 多模態分析：未來可整合電腦視覺，分析曖昧對象的照片表情或穿搭。
+
+4. LINE/Telegram Bot 整合：將此 Agent 封裝至通訊軟體，達成 24 小時即時軍師提醒。
+
+5. AP (人工性格)：有助於為理解或是開發提供靈感
+
+## 參考資料
+1. [如何下prompt]https://raymondhouch.com/lifehacker/digital-workflow/chatgpt-prompt-engineering/
+
+2. [新手入門指南：一步步打造你的 AI 智能代理]https://thunderbit.com/zh-Hant/blog/how-to-build-ai-agent
+
+3. [如何設計自己的 AI Agent 框架]https://blog.aotoki.me/posts/2025/01/15/design-your-ai-agent-framework/
+
+4. [打造超级AI Agent自动化]https://zhuanlan.zhihu.com/p/1987718068210787107
+
+5. [从零开始：用Python和Gemini四步搭建你自己的AI Agent]https://cloud.tencent.cn/developer/article/2607772
