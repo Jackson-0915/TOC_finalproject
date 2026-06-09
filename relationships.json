@@ -1,1 +1,12 @@
-{}
+{
+    "User": {
+        "info": {
+            "event": "Meeting at Chihkan Tower - 2026-01-02T16:00"
+        }
+    },
+    "对方": {
+        "info": {
+            "interests": "義大利麵"
+        }
+    }
+}
